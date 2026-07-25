@@ -1,0 +1,38 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+
+# --- Virtual environment ---
+venv/
+env/
+.venv/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# --- macOS ---
+.DS_Store
+
+# --- Project data (large / regenerable files) ---
+data/raw_clips/*
+data/audio/*
+!data/raw_clips/.gitkeep
+!data/audio/.gitkeep
+
+# --- Fingerprint index / pickled data ---
+*.pkl
+*.pickle
+*.db
+*.sqlite3
+
+# --- IDE / editor ---
+.vscode/
+.idea/
+
+# --- Misc ---
+*.log
+.env
