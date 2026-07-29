@@ -29,7 +29,7 @@ def score_matches(matches):
     return results
 
 
-def identify(query_wav_path, index, fingerprint_fn, min_score=10):
+def identify(query_wav_path, index, fingerprint_fn, min_score=50):
     """End-to-end: fingerprint a query clip, match against index, return best guess."""
     query_hashes = fingerprint_fn(query_wav_path)
     matches = find_matches(query_hashes, index)
