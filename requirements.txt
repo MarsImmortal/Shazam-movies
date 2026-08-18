@@ -4,3 +4,6 @@ librosa
 matplotlib
 soundfile
 jupyter
+fastapi
+uvicorn
+python-multipart
