@@ -62,7 +62,7 @@ def main():
     parser.add_argument("video_path", help="Path to the movie/video file")
     parser.add_argument("--title", help="Human-readable movie title (optional)")
     parser.add_argument("--track-id", help="Custom track ID (optional, derived from filename if omitted)")
-    parser.add_argument("--db", default="data/fingerprints.db", help="Path to the fingerprint database")
+    parser.add_argument("--db", default=os.environ.get("DATABASE_URL"), help="Postgres connection string")
     parser.add_argument("--force", action="store_true", help="Re-ingest even if track_id already exists")
 
     args = parser.parse_args()

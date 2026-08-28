@@ -12,7 +12,7 @@ from match import identify
 def main():
     parser = argparse.ArgumentParser(description="Identify a movie from an audio/video clip.")
     parser.add_argument("clip_path", help="Path to the query clip (wav or video)")
-    parser.add_argument("--db", default="data/fingerprints.db")
+    parser.add_argument("--db", default=os.environ.get("DATABASE_URL"), help="Postgres connection string")
     parser.add_argument("--min-score", type=int, default=50)
 
     args = parser.parse_args()

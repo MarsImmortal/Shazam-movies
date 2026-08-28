@@ -23,7 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DB_PATH = "data/fingerprints.db"
+DB_PATH = os.environ.get("DATABASE_URL")  # instead of "data/fingerprints.db"
 
 
 @app.get("/health")
