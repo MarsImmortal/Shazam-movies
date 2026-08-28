@@ -3,7 +3,7 @@ scipy
 librosa
 matplotlib
 soundfile
-jupyter
 fastapi
 uvicorn
 python-multipart
+psycopg2-binary
