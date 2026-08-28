@@ -32,19 +32,26 @@ class FingerprintIndex:
             """)
         self.conn.commit()
 
-    def add_track(self, track_id, hashes, title=None):
+    def add_track(self, track_id, hashes, title=None, chunk_size=20000):
         with self.conn.cursor() as cur:
             cur.execute(
-                "INSERT INTO tracks (track_id, title) VALUES (%s, %s) ON CONFLICT (track_id) DO NOTHING",
-                (track_id, title or track_id)
-            )
-            psycopg2.extras.execute_values(
-                cur,
-                "INSERT INTO fingerprints (hash, track_id, offset_time) VALUES %s",
-                [(int(h), track_id, int(t)) for h, t in hashes]
-            )
+            "INSERT INTO tracks (track_id, title) VALUES (%s, %s) ON CONFLICT (track_id) DO NOTHING",
+            (track_id, title or track_id)
+        )
         self.conn.commit()
 
+        total = len(hashes)
+        for i in range(0, total, chunk_size):
+            chunk = hashes[i:i + chunk_size]
+            with self.conn.cursor() as cur:
+                psycopg2.extras.execute_values(
+                    cur,
+                    "INSERT INTO fingerprints (hash, track_id, offset_time) VALUES %s",
+                    [(int(h), track_id, int(t)) for h, t in chunk]
+                )
+            self.conn.commit()
+            print(f"  Inserted {min(i + chunk_size, total)}/{total} hashes...")
+            
     def lookup(self, h):
         with self.conn.cursor() as cur:
             cur.execute(
