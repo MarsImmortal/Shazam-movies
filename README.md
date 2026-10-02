@@ -1,1 +1,1 @@
-# ShazamForMovies
+# SpotFlix
